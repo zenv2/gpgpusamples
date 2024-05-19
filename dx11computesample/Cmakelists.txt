@@ -1,0 +1,24 @@
+cmake_minimum_required(VERSION 3.0)
+
+set(NAME dx11computesample)
+
+project(
+    ${NAME}
+    VERSION 0.1
+    DESCRIPTION "Simple DX11 app running compute shader"
+)
+
+file(GLOB_RECURSE SOURCES ${PROJECT_SOURCE_DIR}/src/*.cpp)
+
+add_executable(${PROJECT_NAME} ${SOURCES})
+
+target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_20)
+
+#if(NOT "$ENV{DXSDK_DIR}" STREQUAL "")
+#    target_include_directories(${PROJECT_NAME} PUBLIC $ENV{DXSDK_DIR}/Include)
+#else()
+#    message(WARNING "DXSDK_DIR not found")
+#endif()
+
+target_include_directories(${PROJECT_NAME} PUBLIC "${PROJECT_SOURCE_DIR}/src")
+target_link_libraries(${PROJECT_NAME} PUBLIC "dxgi.lib" "d3d11.lib" "d3dcompiler.lib")
